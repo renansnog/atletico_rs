@@ -66,3 +66,12 @@ Envie gravações com `Content-Type: application/json`. Jogadores exigem `nome` 
 ## Documentação e autoria
 
 A [documentação técnica](docs/relatorio-tecnico.md) registra o diagnóstico, as contribuições de Renan Silva Nogueira e as alterações realizadas com auxílio de IA, além dos testes e das evidências da execução.
+
+## Testes automatizados
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install pytest
+.\.venv\Scripts\python.exe -m pytest -v
+```
+
+Validação local em 25/11/2026: **13 testes aprovados em 1,13 s**, conforme execução registrada pelo responsável. Abrange API, MySQL, CRUD de jogadores, agenda, diretoria, validação e erro de banco simulado. Os testes criam e removem registros fictícios; utilize preferencialmente um banco de testes. Não substituem testes de navegador, segurança ou produção.

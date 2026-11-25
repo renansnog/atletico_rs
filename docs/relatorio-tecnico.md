@@ -70,3 +70,7 @@ O Chromium Headless 156, controlado pelo Playwright, abriu a aplicação em exec
 ## Limites da validação
 
 O teste foi feito em Linux com um banco isolado. O README inclui os comandos para Windows, plataforma em que a aplicação ainda não foi executada. A gestão funciona em ambiente local e sem autenticação de usuários da interface.
+
+## Validação local — 25/11/2026
+
+Execução de `python -m pytest -v` no ambiente Windows do responsável: 13 passed in 1.13s. Todos os casos da suíte passaram. CRUD de jogadores também confirmado manualmente pelo responsável. O MVP é funcional em ambiente local; não houve auditoria de segurança, teste de carga ou validação integral de interface. A evidência é o resultado do terminal informado pelo responsável, não uma certificação independente.

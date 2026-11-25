@@ -75,3 +75,7 @@ A [documentação técnica](docs/relatorio-tecnico.md) registra o diagnóstico, 
 ```
 
 Validação local em 25/11/2026: **13 testes aprovados em 1,13 s**, conforme execução registrada pelo responsável. Abrange API, MySQL, CRUD de jogadores, agenda, diretoria, validação e erro de banco simulado. Os testes criam e removem registros fictícios; utilize preferencialmente um banco de testes. Não substituem testes de navegador, segurança ou produção.
+
+## Publicação da versão 1.0.0
+
+[Release v1.0.0](https://github.com/renansnog/atletico_rs/releases/tag/v1.0.0) — publicação como pre-release confirmada pelo responsável em 25/11/2026. MVP de demonstração local, não homologado para produção.

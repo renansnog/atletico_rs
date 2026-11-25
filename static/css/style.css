@@ -7,7 +7,6 @@ body {
 header {
   background: #228785;
   color: #fff;
-  /* background-image: url("C:\Users\HP\atletico_rs\static\img\playersfundoHeader.png"); */
   padding: 15px;
   text-align: center;
   text-shadow: 1px 1px 1px #000;
@@ -22,7 +21,6 @@ nav ul {
 
 nav a {
   color: #fff;
-  border-radius: 1px solid #000;
   text-decoration: none;
 }
 
@@ -33,4 +31,62 @@ section {
 
 h2 {
   color: #228785;
+}
+
+nav ul {
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+form, .registros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+input, select, button {
+  font: inherit;
+  padding: 8px;
+  border: 1px solid #777;
+  border-radius: 4px;
+}
+
+.acoes {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+form .acoes {
+  grid-column: 1 / -1;
+}
+
+button {
+  background: #196d6b;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.registros article {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+
+.registros img {
+  height: 100px;
+  object-fit: contain;
 }

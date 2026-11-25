@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Esporte Clube Atlético Gaúcho</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body>
     <!-- Menu  -->
@@ -19,7 +19,7 @@
           <li><a href="#historia">História</a></li>
           <li><a href="#titulos">Títulos</a></li>
           <li><a href="#contato">Contato</a></li>
-          <li><a href="diretoria">Administrativo</a></li>
+          <li><a href="#diretoria">Diretoria</a></li>
         </ul>
       </nav>
     </header>
@@ -36,12 +36,40 @@
     <!-- Jogadores -->
     <section id="jogadores">
       <h2>Jogadores</h2>
-      <div id="listaJogadores"></div>
+      <form id="formJogador">
+        <label>Nome <input name="nome" maxlength="100" required /></label>
+        <label>Idade <input name="idade" type="number" min="1" max="120" required /></label>
+        <label>Local de nascimento <input name="localNascimento" maxlength="100" /></label>
+        <label>Times anteriores <input name="timesAnterior" maxlength="300" /></label>
+        <label>Foto
+          <select name="foto">
+            <option value="">Sem foto</option>
+            <option value="leonelMessi.png">Leonel Messi</option>
+            <option value="carlosAndrade.png">Carlos Andrade</option>
+            <option value="andreVieira.png">André Vieira</option>
+            <option value="paulinhoSabia.png">Paulinho Sabiá</option>
+          </select>
+        </label>
+        <div class="acoes">
+          <button type="submit">Cadastrar jogador</button>
+          <button type="button" id="cancelarEdicao" hidden>Cancelar edição</button>
+        </div>
+      </form>
+      <p id="statusJogadores" role="status"></p>
+      <div id="listaJogadores" class="registros"></div>
     </section>
 
     <!-- Agenda -->
     <section id="agenda">
       <h2>Agenda</h2>
+      <form id="formPartida">
+        <label>Adversário <input name="adversario" maxlength="100" required /></label>
+        <label>Local <input name="local" maxlength="200" required /></label>
+        <label>Data <input name="data" type="date" required /></label>
+        <label>Horário <input name="horario" type="time" required /></label>
+        <div class="acoes"><button type="submit">Cadastrar partida</button></div>
+      </form>
+      <p id="statusAgenda" role="status"></p>
       <div id="listaAgenda"></div>
     </section>
 
@@ -83,10 +111,10 @@
     </section>
     <!-- Diretoria -->
     <section id="diretoria">
-      <h2>Administrativo</h2>
+      <h2>Diretoria</h2>
       <div id="listaDiretoria"></div>
     </section>
 
-    <script src="js/script.js"></script>
+    <script src="/static/js/script.js"></script>
   </body>
 </html>

@@ -1,105 +1,68 @@
-# Atlético RS
+# Atlético RS · v1.0.0
 
-Projeto web para apresentação de informações de um clube de futebol, com páginas estáticas e uma API desenvolvida em Python.
+Sistema web de gestão esportiva para manter o elenco do Atlético RS, cadastrar e consultar partidas e consultar a diretoria. O MVP preserva a página institucional, as cores e as imagens do projeto original.
 
-## Tecnologias
+## Funcionalidades
 
-- HTML, CSS e JavaScript — interface web
-- Python e Flask — servidor e API
-- MySQL — banco de dados
-- mysql-connector-python — conexão entre Python e MySQL
-
-## Funcionalidades presentes no código
-
-- Página inicial servida pelo Flask
-- Consulta de jogadores: `GET /api/jogadores`
-- Consulta da agenda de partidas: `GET /api/agenda`
-- Consulta da diretoria: `GET /api/diretoria`
-
-As rotas de consulta retornam dados em JSON. O banco também define uma tabela de contato, mas não há uma rota correspondente no `app.py` atual.
-
-## Estrutura do projeto
-
-```text
-atletico_rs/
-├── app.py                 # Aplicação Flask e endpoints da API
-├── atletico_rs.sql        # Criação do banco, tabelas e registros de exemplo
-├── requeriments.txt       # Dependências Python (nome atual do arquivo)
-├── static/
-│   ├── index.html         # Página inicial
-│   ├── css/               # Estilos
-│   ├── img/               # Imagens
-│   └── js/                # Scripts do frontend
-├── .env                   # Arquivo atualmente vazio
-├── .gitignore             # Arquivo atualmente vazio
-└── README.md
-```
-
-## Como executar localmente
-
-### Pré-requisitos
-
-- Python 3
-- MySQL em execução
-- Git (opcional, para clonar o projeto)
-
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/renansnog/atletico_rs.git
-cd atletico_rs
-```
-
-### 2. Criar um ambiente virtual
-
-No Windows (PowerShell):
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### 3. Instalar as dependências
-
-```bash
-pip install -r requeriments.txt
-```
-
-### 4. Preparar o banco de dados
-
-Execute o script `atletico_rs.sql` no MySQL Workbench ou em outro cliente MySQL. Ele cria o banco `atletico_rs`, as tabelas `jogadores`, `agenda`, `diretoria` e `contato`, e insere alguns jogadores de exemplo.
-
-### 5. Configurar a conexão
-
-No arquivo `app.py`, ajuste os parâmetros de `mysql.connector.connect()` para corresponderem ao seu servidor MySQL local (host, usuário e senha).
-
-**Atenção:** não publique senhas ou outras credenciais no GitHub. Recomenda-se migrar essa configuração para variáveis de ambiente e adicionar `.env` e `.venv/` ao `.gitignore`.
-
-### 6. Iniciar a aplicação
-
-```bash
-python app.py
-```
-
-Acesse `http://127.0.0.1:5000/` no navegador.
-
-Para consultar a API, use, por exemplo, `http://127.0.0.1:5000/api/jogadores`.
-
-## Banco de dados
-
-| Tabela | Finalidade |
+| Área | Operações disponíveis |
 | --- | --- |
-| `jogadores` | Dados dos jogadores e nomes de arquivos de fotos |
-| `agenda` | Datas, horários, locais e adversários |
-| `diretoria` | Cargos e integrantes da diretoria |
-| `contato` | Rede social, telefone e e-mail |
+| Jogadores | Cadastrar, listar, consultar por ID na API, editar e excluir com confirmação na tela |
+| Agenda | Cadastrar e listar partidas por data e horário |
+| Diretoria | Consultar integrantes e cargos |
+| Demonstração | Carregar exemplos de elenco, partidas e diretoria com `demonstracao.sql` |
 
-## Observações
+Os formulários ficam nas seções **Jogadores** e **Agenda**. A opção **Diretoria** no menu abre a consulta correspondente. O MVP foi projetado para uso local em `127.0.0.1`. A área de gestão não possui login. A seção Loja permanece como espaço reservado.
 
-- A configuração atual usa `debug=True`, apropriado apenas para desenvolvimento local.
-- A API depende de um MySQL local configurado e das tabelas criadas pelo script SQL.
-- Este README documenta a estrutura identificada no repositório; não representa uma validação de execução em produção.
+## Arquitetura e tecnologias
 
-## Autor
+O Flask serve a página, os arquivos estáticos e a API JSON na mesma origem. A interface usa HTML, CSS e JavaScript e atualiza as listas após cada operação. O Flask valida os dados e utiliza o MySQL Connector/Python para executar consultas parametrizadas e confirmar as gravações. O MySQL armazena os registros nas tabelas `jogadores`, `agenda` e `diretoria`. A tabela `contato` foi preservada e a seção institucional de contato continua estática.
 
-[renansnog](https://github.com/renansnog)
+| Arquivo | Responsabilidade |
+| --- | --- |
+| `app.py` | Servidor Flask, API, integração com MySQL e validação |
+| `static/` | Página, estilos, imagens e formulários JavaScript |
+| `atletico_rs.sql` | Criação do banco e das tabelas sem apagar registros |
+| `demonstracao.sql` | Dados de exemplo opcionais |
+| `.env.example` | Modelo de configuração local do banco |
+| `requirements.txt` | Dependências Python |
+
+## Executar no Windows
+
+Pré-requisitos: Git, Python 3.10 ou superior e MySQL Server em execução. O MySQL Workbench facilita executar os scripts SQL.
+
+1. No PowerShell, clone o repositório e prepare o ambiente.
+
+   ```powershell
+   git clone https://github.com/renansnog/atletico_rs.git
+   cd atletico_rs
+   python -m venv .venv
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+   Copy-Item .env.example .env
+   ```
+
+2. No MySQL Workbench, execute `atletico_rs.sql` na conexão local. Para uma instalação de demonstração vazia, execute também `demonstracao.sql` uma vez. Se já houver dados, use o banco existente e pule a carga de exemplo para evitar duplicatas.
+
+3. Edite `.env` no VS Code. Preencha `DB_USER` e `DB_PASSWORD` com as credenciais locais e ajuste host e porta se necessário. Use uma conta MySQL com acesso ao banco `atletico_rs` e permissões de leitura e gravação para as operações descritas. O arquivo `.env` é ignorado pelo Git.
+
+4. Volte ao PowerShell e inicie a aplicação.
+
+   ```powershell
+   .\.venv\Scripts\python.exe app.py
+   ```
+
+5. Abra [http://127.0.0.1:5000/](http://127.0.0.1:5000/) no navegador. Para encerrar, pressione **Ctrl+C** no terminal.
+
+## API
+
+| Endpoint | Métodos |
+| --- | --- |
+| `/api/jogadores` | `GET`, `POST` |
+| `/api/jogadores/<id>` | `GET`, `PUT`, `DELETE` |
+| `/api/agenda` | `GET`, `POST` |
+| `/api/diretoria` | `GET` |
+
+Envie gravações com `Content-Type: application/json`. Jogadores exigem `nome` e `idade`. Os campos opcionais são `localNascimento`, `timesAnterior` e `foto`. Partidas exigem `adversario`, `local`, `data` em `AAAA-MM-DD` e `horario` em `HH:MM`.
+
+## Documentação e autoria
+
+A [documentação técnica](docs/relatorio-tecnico.md) registra o diagnóstico, as contribuições de Renan Silva Nogueira e as alterações realizadas com auxílio de IA, além dos testes e das evidências da execução.
